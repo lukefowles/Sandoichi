@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+// import order from './routes/order.js';
+// import auth from './routes/auth.js';
+import userRouter from './routes/user.js';
 
 dotenv.config();
 
@@ -19,6 +22,7 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
+app.use('/users', userRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
