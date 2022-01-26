@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 
 const App = () => {
 
+
+    //react redux attempt 1:
+    
     // const dispatch = useDispatch();
 
     // useEffect(() => {
