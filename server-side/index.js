@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 // import order from './routes/order.js';
 // import auth from './routes/auth.js';
 import userRouter from './routes/user.js';
+import orderRouter from "./routes/order.js"
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ connection.once('open', () => {
 });
 
 app.use('/users', userRouter);
+app.use("/orders", orderRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

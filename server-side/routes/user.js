@@ -1,6 +1,5 @@
 import {Router} from 'express';
 import User from '../models/user-model.js'
-import UserService from "../services/user-service.js"
 
 const userRouter = new Router();
 
@@ -21,6 +20,23 @@ userRouter.route("/user").get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))  
 })
 
+//get a specific user by Id
+userRouter.route("/user/:id").get((req, res) => {
+
+    User.find({id: req.params.id})
+        .then(users => res.json(users))
+        .catch(err => res.status(400).json('Error: ' + err))  
+})
+
+
+//get all user orders
+userRouter.route("/orders/:id").get((req, res)=> {
+    User.findOne({ id: req.params.id })
+    .then(populate('orders'))
+    .then(user => res.json(user.orders))
+    .catch(err => res.status(400).json('Error: ' + err))  
+})
+
 //make a new user
 userRouter.route('/add').post((req, res) => {
 
@@ -39,12 +55,25 @@ userRouter.route('/update/:id').put((req, res) => {
             user.name = req.body.name;
             user.email = req.body.email;
             user.address = req.body.address;
+            // user.orders = req.
             user.save()
                 .then(() => res.json('Updated'))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err))
 });
+
+//updates a user order
+// userRouter.route('/update/users-order').put((userID, orderID, res) => {
+//     User.findById(userID)
+//         .then(user => {
+//             user.orders.push(orderID);
+//             user.save()
+//                 .then(() => res.json('Updated'))
+//                 .catch(err => res.status(400).json('Error: ' + err));
+//         }) 
+//         .catch(err => res.status(400).json('Error: ' + err))
+// });
 
 
 //delete a user

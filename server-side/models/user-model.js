@@ -24,6 +24,10 @@ const userSchema = new Schema({
         trim: true,
         minlength: 1,
     },
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order'
+    }]
     
 },{
     timestamps: true,
