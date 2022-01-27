@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 // import auth from './routes/auth.js';
 import userRouter from './routes/user.js';
 import orderRouter from "./routes/order.js"
+import {auth} from "./routes/tokenRoute.js"
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const port = process.env.PORT || 5000
 
 app.use(cors());
 app.use(express.json());
+app.use(auth);
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser: true});

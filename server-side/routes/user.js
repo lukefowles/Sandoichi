@@ -2,6 +2,8 @@ import {Router} from 'express';
 import User from '../models/user-model.js'
 import {registerValidation, loginValidation} from '../services/validation.js'
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
+import {auth} from './tokenRoute.js'
 
 const userRouter = new Router();
 
@@ -81,13 +83,16 @@ userRouter.route('/login').get(async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if(!validPassword) return res.status(400).send('Invalid password');
 
+    const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET)
+    res.header('auth-token', token).send(token);
+
     return res.status(200).send("Logged in succesfully")
 
 });
 
 
 //update a user
-userRouter.route('/update/:id').put((req, res) => {
+userRouter.put('/update/:id', auth, (req, res) => {
     User.findById(req.params.id) 
         .then(user => {
             // user = req.body;
