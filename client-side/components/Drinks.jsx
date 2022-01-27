@@ -10,7 +10,7 @@ const Drinks = () => {
         <div className={styles.card}>
           <Image src="/img/ginger.png" alt="" width="300px" height="200px" />
           <h1 className={styles.title}>Fiery Peruvian Ginger Beer</h1>
-          <span className={styles.price}>£4.50</span>
+          <span className={styles.price}>£2.50</span>
         </div>
         <div className={styles.card}>
           <Image src="/img/apple.png" alt="" width="300px" height="200px" />
