@@ -68,7 +68,7 @@ orderRouter.route("/delete/:orderId/:userId").delete((req, res) => {
     .then(() => {
         User.findById(req.params.userId)
             .then((user) => {
-                console.log(orderID);
+                console.log(orderID)
                 console.log(mongoose.Types.ObjectId(req.params.orderId));
                 console.log(user.orders);
                 user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
