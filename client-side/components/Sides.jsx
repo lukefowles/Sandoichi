@@ -4,7 +4,7 @@ import styles from "../styles/Sides.module.css";
 const Sides = () => {
   return ( 
     <div className={styles.container}>
-
+      Hello
     </div>
 )    
 };
