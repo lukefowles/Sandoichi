@@ -3,7 +3,7 @@ import styles from "../styles/Drinks.module.css";
 
 const Drinks = () => {
   return ( 
-    <div className={styles.container}>
+    <div id="drinks" className={styles.container}>
       Hello
     </div>
 )    

@@ -9,10 +9,15 @@
     text-align: center;
     /* position: fixed; */
     position: fixed;
-    z-index: 0;
+    z-index: 1;
     box-shadow: 5px 0 5px -5px rgb(203, 203, 203);
     padding-top: 100px;
+    scroll-margin-top: 8em;
 } 
+
+/* #sandwich{
+    scroll-margin-top: 8em;
+} */
 
 .sidebarItems{
     height:auto;

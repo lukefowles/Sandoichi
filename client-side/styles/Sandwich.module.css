@@ -1,4 +1,8 @@
 .container{
+    padding: 50px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: pink;
     z-index: -1;
     width: 100%;
@@ -6,3 +10,28 @@
     /* scroll-snap-align: start;
     scroll-snap-type: y mandatory; */
 }
+
+.wrapper{
+    cursor: pointer;
+    width: 200px;
+    height: 100px;
+    background-color: aqua;
+    display: flex-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .price {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+  }

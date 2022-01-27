@@ -3,7 +3,7 @@ import styles from "../styles/Sides.module.css";
 
 const Sides = () => {
   return ( 
-    <div className={styles.container}>
+    <div id="sides" className={styles.container}>
       Hello
     </div>
 )    

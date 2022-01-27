@@ -4,11 +4,13 @@
 
 .sections{
     /* width: 100%; */
-    width:calc(100% - 100px);
-    height: calc(100vh - 100px);
-    /* height: 100vh; */
+    width: calc(100% - 300px);
+    /* height: calc(100vh - 100px); */
+    position: fixed;
+    height: 100vh;
     left: 300px;
     background-color: rgb(255, 255, 255);
     position: absolute; 
+    /* overflow: hidden; */
     
 } 
