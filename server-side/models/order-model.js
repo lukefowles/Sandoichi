@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import itemSchema from "./item-model.js"
 
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
     items:{
-        type: [String],
+        type: [itemSchema],
         required: true,
         unique: false,
         trim: false,

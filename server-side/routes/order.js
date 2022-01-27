@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import Order from '../models/order-model.js';
 import User from '../models/user-model.js';
+import mongoose from 'mongoose';
 
 const orderRouter = new Router();
 
@@ -39,22 +40,47 @@ orderRouter.route("/add").post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));   
 })
 
+
+//NOT WORKING AT PRESENT
 //delete an order
 orderRouter.route("/delete/:orderId/:userId").delete((req, res) => {
     //Find order and delete
-    Order.findByIdAndDelete(req.params.orderId)
-    //Find user and update
+    // Order.findByIdAndDelete(req.params.orderId)
+    
+    // // Find user and update
+    // .then(() => {
+    //     User.findById(req.params.userId)
+    //         .then((user) => {
+    //             console.log(user);
+    //             user.orders = user.orders.filter(order => or);
+    //             console.log(user.orders);
+    //             user.save(user)
+    //             .catch(err => res.status(400).json('Error: ' + err))  
+    //         })
+    // })
+    // .then(() => res.json('Order deleted'))
+    // .catch(err => res.status(400).json('Error: ' + err));
+    //Find user
+    let orderID;
+
+    Order.findById(req.params.orderId)
+    .then(order => orderID = order._id)
     .then(() => {
         User.findById(req.params.userId)
             .then((user) => {
-                console.log(user);
-                user.orders = user.orders.filter(order => order !== req.params.orderId);
-                User.save(user)
+                console.log(orderID);
+                console.log(mongoose.Types.ObjectId(req.params.orderId));
+                console.log(user.orders);
+                user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
+                console.log(user.orders);
+                user.save(user)
                 .catch(err => res.status(400).json('Error: ' + err))  
             })
     })
     .then(() => res.json('Order deleted'))
     .catch(err => res.status(400).json('Error: ' + err));
+    
+  
 })
 
 export default orderRouter

@@ -31,8 +31,8 @@ userRouter.route("/user/:id").get((req, res) => {
 
 //get all user orders
 userRouter.route("/orders/:id").get((req, res)=> {
-    User.findOne({ id: req.params.id })
-    .then(populate('orders'))
+    User.findOne({ _id: req.params.id })
+    .then(user => user.populate('orders'))
     .then(user => res.json(user.orders))
     .catch(err => res.status(400).json('Error: ' + err))  
 })
