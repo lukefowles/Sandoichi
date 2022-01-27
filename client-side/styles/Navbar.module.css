@@ -1,0 +1,13 @@
+.container{
+    height: 70px;
+    padding: 0px 50px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+} 
+
+.text{
+    font-size: 7vh;
+}
