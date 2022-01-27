@@ -1,0 +1,34 @@
+.container{
+    background-color: #ffffff;;
+    width: 20%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    /* position: fixed; */
+    position: sticky;
+    box-shadow: 5px 5px 5px rgb(203, 203, 203);
+    
+} 
+
+.sidebarItems{
+    height:auto;
+    width: 100%;
+    padding-left: 15%;
+    align-items: center;
+}
+
+.text{
+    font-size: 3vh;
+    font-weight: bold;
+    padding-top: 50%;
+    padding-bottom: 30%;
+}
+
+/* .text{
+    padding: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0px 8px 0px;
+    list-style: center;
+} */
