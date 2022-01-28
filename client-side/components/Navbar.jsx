@@ -1,7 +1,8 @@
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
+import LoginButton from "./LoginButton";
 
-const Navbar = () => {
+const Navbar = ({showLogin, setShowLogin}) => {
   return (
 
     <div className={styles.container}>
@@ -19,10 +20,17 @@ const Navbar = () => {
         <Image src="/img/sandoichi.png" alt="" width="350px" height="90px" />
       </ul>
     </div>
-    <div className={styles.item}>
-      <div className={styles.cart}>
-        <Image src="/img/shopping-cart.png" alt="" width="30px" height="30px" />
-        <div className={styles.counter}>2</div>
+    <div className={styles.navbuttons}>
+      <div className={styles.item}>
+        <ul className={styles.login}>
+          <LoginButton showLogin = {showLogin} setShowLogin={setShowLogin}/>
+        </ul>
+      </div>
+      <div className={styles.item}>
+        <div className={styles.cart}>
+          <Image src="/img/shopping-cart.png" alt="" width="60px" height="60px" />
+          <div className={styles.counter}>2</div>
+        </div>
       </div>
     </div>
   </div>
