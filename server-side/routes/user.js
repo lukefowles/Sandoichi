@@ -3,7 +3,7 @@ import User from '../models/user-model.js'
 import {registerValidation, loginValidation} from '../services/validation.js'
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import {auth} from './tokenRoute.js'
+// import {auth} from './tokenRoute.js'
 
 const userRouter = new Router();
 
@@ -68,7 +68,7 @@ userRouter.route('/add').post( async (req, res) => {
     newUser.save()
         .then(() => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err))
-        .then(() => res.status(200).res.send("Logged in succesfully"))
+        // .then(() => res.status(200).res.send("Logged in succesfully"))
     
 });
 
@@ -92,7 +92,7 @@ userRouter.route('/login').get(async (req, res) => {
 
 
 //update a user
-userRouter.put('/update/:id', auth, (req, res) => {
+userRouter.put('/update/:id', (req, res) => {
     User.findById(req.params.id) 
         .then(user => {
             // user = req.body;
