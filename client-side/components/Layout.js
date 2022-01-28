@@ -1,6 +1,6 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import UserModal from "./UserModal";
+// import UserModal from "./UserModal";
 import Sidebar from "./Sidebar";
 import styles from "../styles/App.module.css";
 
@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
   return (
     <>
         <Navbar showLogin={showLogin} setShowLogin = {setShowLogin} />
-        <UserModal showLogin={showLogin}/>
+        {/* <UserModal showLogin={showLogin}/> */}
         <Sidebar />
       <div className={styles.app}>
           <div className={styles.sections}>
