@@ -11,7 +11,7 @@ const Sidebar = () => {
             <Image src="/./img/sandwich-2.png" alt="" width="30" height="30" />
           </div> */}
 
-          <div className={styles.text}><a href="#home">HOME</a></div>
+          <div id="intro" className={styles.text}><a href="#intro">HOME</a></div>
           <div className={styles.text}><a href="#sandwich">SANDWICHES</a> </div>
           <div className={styles.text}><a href="#sides">SIDES</a> </div>
           <div className={styles.text}><a href="#drinks">DRINKS</a> </div>

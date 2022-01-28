@@ -12,9 +12,9 @@ import Drinks from "./Drinks";
 const Layout = ({ children }) => {
   return (
     <>
-      <div className={styles.app}>
         <Navbar />
         <Sidebar />
+      <div className={styles.app}>
           <div className={styles.sections}>
             <Intro/>
             <Sandwich />

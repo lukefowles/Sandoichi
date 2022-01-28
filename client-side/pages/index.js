@@ -10,7 +10,6 @@ export default function Home() {
         <meta name="description" content="Best Sandwiches in the UK" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
     </div>
   )
 }
