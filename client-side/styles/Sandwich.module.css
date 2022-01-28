@@ -23,7 +23,7 @@
    align-items: center;
    flex: 0 0 calc(33.33% - 30px);   /* flex-basis adjustment for margin */
    margin: 2px;
-   cursor: pointer;
+   /* cursor: pointer; */
 }
 
 .title {

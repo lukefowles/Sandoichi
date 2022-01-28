@@ -1,8 +1,13 @@
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
+import {useSelector} from "react-redux";
 import LoginButton from "./LoginButton";
 
+// for editing number of items on the cart icon top right of page
+const quantity = useSelector(state => state.cart.quantity);
+
 const Navbar = ({showLogin, setShowLogin}) => {
+
   return (
 
     <div className={styles.container}>
@@ -20,6 +25,7 @@ const Navbar = ({showLogin, setShowLogin}) => {
         <Image src="/img/sandoichi.png" alt="" width="350px" height="90px" />
       </ul>
     </div>
+
     <div className={styles.navbuttons}>
       <div className={styles.item}>
         <ul className={styles.login}>
@@ -29,25 +35,12 @@ const Navbar = ({showLogin, setShowLogin}) => {
       <div className={styles.item}>
         <div className={styles.cart}>
           <Image src="/img/shopping-cart.png" alt="" width="60px" height="60px" />
-          <div className={styles.counter}>2</div>
+          <div className={styles.counter}>{quantity}</div>
         </div>
+
       </div>
     </div>
   </div>
-
-  // <div className={styles.container}>
-  //       <div className={styles.text}>Sandoichi</div>
-  //         {/* <div className={styles.callButton}>
-  //           <Image src="/./img/logo.png" alt="" width="200" height="80"/>
-  //         </div> */}
-
-    // <div className={styles.item}>
-    //   <div className={styles.cart}>
-    //     <Image src="/img/shopping-cart.png" alt="" width="30px" height="30px" />
-    //     <div className={styles.counter}>2</div>
-    //   </div>
-    // </div>
-  // </div>
   )
 };
 

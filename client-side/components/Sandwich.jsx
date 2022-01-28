@@ -1,8 +1,24 @@
 import React from "react";
 import styles from "../styles/Sandwich.module.css";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartSlice";
+import { useState } from "react";
 
-const Sandwich = () => {
+const Sandwich = ({sandwich}) => {
+  // const [price, setPrice] = useState(sandwich.price);
+  // const [quantity, setQuantity] = useState();
+  // const dispatch = useDispatch();
+
+
+
+  // const handleClick = () => {
+  //   dispatch(addProduct(...products, quantity))
+  // };
+
+  // onClick={handleClick()}
+  // onChange={(e) => setQuantity(e.target.value)} 
+
   return (
     <div id="sandwich" className={styles.container}>
       <div className={styles.row}>
@@ -12,7 +28,7 @@ const Sandwich = () => {
           <span className={styles.price}>£4.50</span>
           <div className={styles.add}>
             <input type="number" defaultValue={1} className={styles.quantity}/>
-            <button className={styles.button}>Add to Cart</button>
+            <button className={styles.button}  >Add to Cart</button>
          </div>
         </div>
         <div className={styles.card}>
