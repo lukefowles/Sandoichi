@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartSlice";
 import { useState } from "react";
 
-const Sandwich = ({sandwich}) => {
+const Sandwich = () => {
   // const [price, setPrice] = useState(sandwich.price);
   // const [quantity, setQuantity] = useState();
   // const dispatch = useDispatch();

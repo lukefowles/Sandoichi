@@ -12,18 +12,17 @@ import Drinks from "./Drinks";
 const Layout = ({ children }) => {
   return (
     <>
-        <Navbar />
-        <Sidebar />
+      <Navbar />
+      <Sidebar />
       <div className={styles.app}>
-          <div className={styles.sections}>
-            <Intro/>
-            <Sandwich />
-            <Sides />
-            <Drinks />
-          </div>
+        <div className={styles.sections}>
+          <Intro />
+          <Sandwich />
+          <Sides />
+          <Drinks />
+        </div>
       </div>
       {children}
-      {/* <Footer/> */}
     </>
   );
 };
