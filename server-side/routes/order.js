@@ -72,18 +72,25 @@ orderRouter.route("/delete/:orderId/:userId").delete((req, res) => {
 
     Order.findById(req.params.orderId)
     .then(order => orderID = order._id)
+    // .then(() => {
+    //     User.findById(req.params.userId)
+    //         .then((user) => {
+    //             console.log(orderID)
+    //             console.log(mongoose.Types.ObjectId(req.params.orderId));
+    //             console.log(user.orders);
+    //             user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
+    //             console.log(user.orders);
+    //             user.save(user)
+    //             .catch(err => res.status(400).json('Error: ' + err))  
+    //         })
+    // })
     .then(() => {
-        User.findById(req.params.userId)
-            .then((user) => {
-                console.log(orderID)
-                console.log(mongoose.Types.ObjectId(req.params.orderId));
-                console.log(user.orders);
-                user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
-                console.log(user.orders);
-                user.save(user)
-                .catch(err => res.status(400).json('Error: ' + err))  
-            })
+        User.findOneAndUpdate({_id: req.params.userId}, {$pull : {orders: req.params.orderId}}, (err, data) => {
+            if (err) {
+                return res.status(500).json({ error: 'error in deleting address' });
+            }})
     })
+    .then(() => Order.findByIdAndDelete(orderID))
     .then(() => res.json('Order deleted'))
     .catch(err => res.status(400).json('Error: ' + err));
     
