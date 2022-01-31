@@ -14,6 +14,9 @@ orderRouter.route("/").get((req, res) => {
 
 //get orders by user
 orderRouter.route("/user-orders/:id").get((req, res) => {
+
+    auth(res, req);
+
     Order.find({user: req.params.id})
     .then(orders => res.json(orders))
     .catch(err => res.status(400).json('Error: ' + err))  
@@ -21,6 +24,9 @@ orderRouter.route("/user-orders/:id").get((req, res) => {
 
 //create an order
 orderRouter.route("/add").post((req, res) => {
+
+    auth(res, req);
+
     const newOrder = new Order(req.body);
 
     //Save order
