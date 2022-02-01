@@ -4,12 +4,15 @@ import App from './App';
 import {Provider} from "react-redux";
 import { BrowserRouter as Router } from 'react-router-dom';
 import userReducer from "./features/user"
+import carouselReducer from "./features/carousel"
 import {configureStore} from "@reduxjs/toolkit";
 
 //STORE -> GLOBALISED STATE
-let store = configureStore({
-  reducer: {userReducer,}
+const store = configureStore({
+  reducer: {user: userReducer, carousel: carouselReducer}
 })
+
+console.log(store)
 
 //ACTION -> THE TYPE OF ACTION
 

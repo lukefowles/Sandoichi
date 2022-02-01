@@ -3,7 +3,7 @@ import "./styles/globals.css"
 import MainPage from "./containers/MainPage";
 import CartPage from "./containers/CartPage";
 
-function App() {
+function App({store}) {
   return (
     <div className="App">
         <Routes>
