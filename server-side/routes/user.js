@@ -76,7 +76,7 @@ userRouter.route('/add').post( async (req, res) => {
 
     //Save the new user
     newUser.save()
-        .then(() => res.json('User added!'))
+        .then(() =>{ res.json('User added!')})
         .catch(err => res.status(400).json('Error: ' + err))
         // .then(() => res.status(200).res.send("Logged in succesfully"))
     
