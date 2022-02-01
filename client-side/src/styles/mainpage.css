@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-buttons{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.nav-item{
+    margin: 15px;
+}
