@@ -165,8 +165,129 @@ describe('User Routes', () => {
                         })
                 })
         })
+
+        it('Should return an error if user email is not in the system', (done) => {
+            const user = {
+                name : "Chet",
+                email : "Chet@johnmail.com",
+                address : "2 John St.",
+                password : "Password"
+            }
+
+            chai.request(server)
+                .post('/users/add/')
+                .send(user)
+                .end((err, response) => {
+                    chai.request(server)
+                        .get('/users/login')
+                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .end((err, response) => {
+                            let token = response.header['auth-token']
+                            chai.request(server)
+                                .get('/users/user/')
+                                .set('auth-token', token)
+                                .send({email: "Che@johnmail.com"})
+                                .end((err, response) => {
+                                    response.should.have.status(404)
+                                    response.text.should.equal('Account with that email not found');
+                                    done();
+                                })
+                        })
+                })
+
+        })
     })
 
-    //Cannot add delete user route as make/login user does not return user
+    //Deletes a user by email
+    describe("DELETE /users/delete/:email", () => {
 
+        it('should add a user and then remove it from the database', (done) => {
+            const user = {
+                name : "Chet",
+                email : "Chet@johnmail.com",
+                address : "2 John St.",
+                password : "Password"
+            }
+            chai.request(server)
+                .post('/users/add/')
+                .send(user)
+                .end((err, response) => {
+                    chai.request(server)
+                        .get('/users/login')
+                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .end((err, response) => {
+                            let token = response.header['auth-token']
+                            chai.request(server)
+                                .delete(`/users/delete/${user.email}`)
+                                .set('auth-token', token)
+                                .end((err, response) => {
+                                    response.should.have.status(200);
+                                    response.text.should.equal('"User deleted"');
+                                    //Is this section an integration test?
+                                    chai.request(server)
+                                        .get('/users/user/')
+                                        .set('auth-token', token)
+                                        .send({email: "Chet@johnmail.com"})
+                                        .end((err, response) => {
+                                            response.should.have.status(404);
+                                            response.text.should.equal('Account with that email not found')
+                                            done();
+                                        })
+                                })
+                        }
+                        )
+                })
+        })
+    })
+
+    //Updates a user
+    describe('PUT users/update', () => {
+
+        it('should add the user, login and then update it', (done) => {
+            const user = {
+                name : "Chet",
+                email : "Chet@johnmail.com",
+                address : "2 John St.",
+                password : "Password"
+            }
+
+            const updatedUser = {
+                name : "Chad",
+                email : "Chet@johnmail.com",
+                address : "2 John St.",
+                password : "Password"
+            }
+            chai.request(server)
+                .post('/users/add/')
+                .send(user)
+                .end((err, response) => {
+                    chai.request(server)
+                        .get('/users/login')
+                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .end((err, response) => {
+                            let token = response.header['auth-token']
+                            chai.request(server)
+                                .put('/users/update')
+                                .set('auth-token', token)
+                                .set('email', user.email)
+                                .send(updatedUser)
+                                .end((err, response) => {
+                                    response.should.have.status(200);
+                                    response.text.should.equal('Updated')
+                                    //Is this section an integration test?
+                                    chai.request(server)
+                                        .get('/users/user/')
+                                        .set('auth-token', token)
+                                        .send({email: "Chet@johnmail.com"})
+                                        .end((err, response) => {
+                                            response.should.have.status(200);
+                                            // response.body.name.should.deep.equal(updatedUser.name);
+                                        done();
+                                    })
+                                })
+                        }) 
+                    })   
+        })
+    })
+   
 })
