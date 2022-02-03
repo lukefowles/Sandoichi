@@ -8,7 +8,7 @@ import nextArrow from "../img/img/arrowr.png"
 
 export const CarouselItem = ({children, width, index}) => {
     return (
-        <div className="carousel-item" style={{width: width, height: "75vh"}} id={index}>
+        <div className="carousel-item" style={{width: width}} id={index}>
             {children}
         </div>
     )

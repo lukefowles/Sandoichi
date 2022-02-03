@@ -1,5 +1,6 @@
 .carousel{
     overflow: hidden;
+    height: 75vh;
 }
 
 .inner{
@@ -11,7 +12,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 75vh;
     color:#fff;
 }
 
@@ -40,6 +41,7 @@
     position:absolute;
     top: 75vh;
     left: 45vw;
+    z-index: 2;
 }
 
 .indicators > button {
@@ -65,7 +67,7 @@
     background-color: rgba(90, 90, 90, 0.479);
     word-wrap: normal;
     position: absolute;
-    top: 10.5vh;
+    top: 13.2.5vh;
     z-index: 1;
     width: 100vw;
     height: 75vh;
