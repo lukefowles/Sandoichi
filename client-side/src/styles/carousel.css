@@ -12,6 +12,70 @@
     align-items: center;
     justify-content: center;
     height: 200px;
-    background-color: green;
     color:#fff;
+}
+
+#item1 {
+    background-image: url(../img/img/featured.png);
+    background-size: cover;
+    background-position: center;
+}
+
+#item2 {
+    background-image: url(../img/img/featured2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+#item3 {
+    background-image: url(../img/img/featured3.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top: 75vh;
+    left: 45vw;
+}
+
+.indicators > button {
+    margin: 5px;
+    background:transparent;
+    border:transparent;
+    cursor: pointer;
+}
+
+.indicators > button.indexIndicator {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(179, 179, 179, 0.822);
+}
+
+.indicators > button.active {
+    background-color: rgb(90, 90, 90);
+    color:#fff;
+}
+
+.tagline{
+    background-color: rgba(90, 90, 90, 0.479);
+    word-wrap: normal;
+    position: absolute;
+    top: 10.5vh;
+    z-index: 1;
+    width: 100vw;
+    height: 75vh;
+}
+
+.tagline > h1 {
+    width: 800px;
+    padding-left: 1vw;
+    font-size: 70px;
+    color: white;
+    text-shadow: 1px 3px 5px rgb(68, 67, 67);
+
 }

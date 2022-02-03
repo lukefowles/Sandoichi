@@ -1,15 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
     name: "user",
-    //put the attributes of the use yuo would want in the state as keys and values in the value property
     initialState: {value: {}},
     reducers: {
-        login: (state, action) => {
-            state.value = action.payload
+        login: (state) => {
+
         },
-    },
+        logout: (state) => {
+
+        }
+    }
 });
+
+export default userSlice.reducer;
+
 
 // in other files, when you want to pass in the user state you do the following
 // 1. import {useSelector} from "react-redux"
@@ -19,4 +24,3 @@ export const userSlice = createSlice({
 // 2. const dispatch = useDispatch(login({keys and values of the info you want to change}));
 // 3. dispatch()
 
-export default userSlice.reducer;

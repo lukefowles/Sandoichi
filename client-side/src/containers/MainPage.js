@@ -3,14 +3,15 @@ import "../styles/mainpage.css"
 import NavBar from "../components/NavBar"
 import Carousel, {CarouselItem} from '../components/Carousel';
 import "../styles/carousel.css"
+import featured from "../img/img/featured.png"
 
 function MainPage() {
   return <div>
       <NavBar/>
       <Carousel>
-          <CarouselItem>Item 1</CarouselItem>
-          <CarouselItem>Item 2</CarouselItem>
-          <CarouselItem>Item 3</CarouselItem>
+          <CarouselItem index="item1"></CarouselItem>
+          <CarouselItem index="item2"></CarouselItem>
+          <CarouselItem index="item3"></CarouselItem>
       </Carousel>
   </div>;
 }

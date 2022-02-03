@@ -2,6 +2,8 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 80px;
+    align-items: center;
 }
 
 .nav-buttons{
@@ -12,4 +14,8 @@ nav {
 
 .nav-item{
     margin: 15px;
+}
+
+nav > h1 {
+    font-size: 60px;
 }
