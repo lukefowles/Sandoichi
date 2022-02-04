@@ -36,7 +36,7 @@ const Carousel = ({children}) => {
             if(!paused){
                 updateIndex(activeIndex + 1);
             }
-        }, 2500);
+        }, 2000);
 
         return () => { if(interval) {
             clearInterval(interval)
@@ -44,18 +44,20 @@ const Carousel = ({children}) => {
     })
 
     return(
-        <div className="carousel">
+        <div className="carousel"
+        >
             <div className ="tagline">
                 <h1>Gourmet sandwiches delivered straight to your door</h1>
             </div>
-            <div className="inner" style={{transform: `translateX(-${activeIndex * 100}%)`}}  
-            onMouseEnter={() => dispatch(setPaused(true))}
-            onMouseLeave={() => dispatch(setPaused(false))}>
+            <div className="inner" style={{transform: `translateX(-${activeIndex * 100}%)`}}>
                 {React.Children.map(children, (child, index) => {
                     return React.cloneElement(child, {width: "100%"});
                 })}
             </div>
-            <div className='indicators'>
+            <div className='indicators'
+                onMouseEnter={() => dispatch(setPaused(true))}
+                onMouseLeave={() => dispatch(setPaused(false))}
+            >
                 <button onClick={() => {
                     updateIndex(activeIndex -1);
                 }}> <img src={previousArrow} alt="previous" width="50"/> </button>
@@ -68,7 +70,7 @@ const Carousel = ({children}) => {
                 })}
                 <button onClick={() => {
                     updateIndex(activeIndex +1);
-                }}> <img src={nextArrow} alt="next" width="50"/> </button>
+                }}> <img src={nextArrow} alt="next" width="50"/></button>
             </div>
         </div>
     )

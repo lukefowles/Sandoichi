@@ -2,8 +2,14 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 80px;
+    height: 10vh;
     align-items: center;
+}
+.navbar{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 3;
 }
 
 .nav-buttons{
@@ -13,9 +19,57 @@ nav {
 }
 
 .nav-item{
-    margin: 15px;
+    margin: 5px;
+    background-color: transparent;
+    border: none;
 }
 
-nav > h1 {
+.nav-item > h2{
+    font-size: 30px;
+}
+
+
+.nav-item > h1 {
     font-size: 60px;
 }
+
+.start-order{
+    position: absolute;
+    top: 65vh;
+    left: 2vw;
+}
+
+.start-order > button{
+    height: 180px;
+    width: 400px;
+    font-size: 40px;;
+    border-radius: 10%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.658);
+    box-shadow: 1px 3px 5px rgb(73, 73, 73);
+    display: flex;
+    align-items: center;
+}
+
+.areas{
+    height: 100vh;
+    width: 100vw;
+}
+
+#sandwiches{
+    background-color: green;
+}
+
+#snacks{
+    background-color: red;
+}
+
+#drinks{
+    background-color: blue;
+}
+
+#footer{
+    background-color: orange;
+}
+
+

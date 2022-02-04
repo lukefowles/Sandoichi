@@ -1,6 +1,6 @@
 .carousel{
     overflow: hidden;
-    height: 75vh;
+    height: 90vh;
 }
 
 .inner{
@@ -12,7 +12,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 75vh;
+    height: 90vh;
     color:#fff;
 }
 
@@ -39,7 +39,7 @@
     justify-content: center;
     align-items: center;
     position:absolute;
-    top: 75vh;
+    top: 90vh;
     left: 45vw;
     z-index: 2;
 }
@@ -70,7 +70,7 @@
     top: 13.2.5vh;
     z-index: 1;
     width: 100vw;
-    height: 75vh;
+    height: 90vh;
 }
 
 .tagline > h1 {
@@ -80,4 +80,8 @@
     color: white;
     text-shadow: 1px 3px 5px rgb(68, 67, 67);
 
+}
+
+.start-order{
+    z-index: 2;
 }
