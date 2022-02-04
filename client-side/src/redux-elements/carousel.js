@@ -21,6 +21,6 @@ export const carouselSlice = createSlice({
     }
 });
 
-export const { setActiveIndex, setPaused} = carouselSlice.actions
+export const {setActiveIndex, setPaused} = carouselSlice.actions
 
 export default carouselSlice.reducer;

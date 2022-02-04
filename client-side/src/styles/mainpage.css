@@ -59,26 +59,24 @@ nav {
 }
 
 
-#sandwiches{
-    background-color: green;
-}
-
-#snacks{
-    background-color: red;
-}
-
-#drinks{
-    background-color: blue;
-}
-
-.areas{
+@media only screen and (min-width: 800px) {
+ .areas{
     grid-area: content;
     height: 100vh;
     width: 100vw;
-}
+}}
+@media only screen and (max-width: 800px) {
+    .areas{
+       grid-area: content;
+       height: 2300px;
+       width: 100vw;
+   }}
 
 #footer{
     height: 40vh;
     grid-area: footer;
-    background-color: orange;
+}
+
+section{
+    border-bottom: 3px solid black;
 }
