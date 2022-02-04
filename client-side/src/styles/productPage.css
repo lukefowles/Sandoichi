@@ -1,2 +1,29 @@
 .product-page{
+    display: grid;
+    direction: rtl;
+    grid-template-areas: "sidebar" "content" "content" "content"
+                         "sidebar" "content" "content" "content"
+                         "sidebar" "content" "content" "content"
+                         "footer" "footer" "footer" "footer"
+
 }
+
+.sideBar-area{
+    grid-area: sidebar;
+    width: 25vw;
+    height: 300vh;
+}
+
+
+.areas{
+    grid-area: content;
+    height: 100vh;
+    width: 75vw;
+}
+
+#footer{
+    width: 100vw;
+    height: 40vh;
+    grid-area: footer;
+}
+

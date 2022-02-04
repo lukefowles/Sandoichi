@@ -9,20 +9,24 @@ function MainPage() {
   
   return <>
     <NavBar/>
-      <section className="landing-page" id="landing-page">
-        <LandingPage/>
-      </section>
-      <div className="product-page">
+    <section className="landing-page" id="landing-page">
+      <LandingPage/>
+    </section>
+    <div className="product-page">
+      <div className="sideBar-area">
         <SideBar/>
-        <section className="sandwiches areas" id="sandwiches">
-        </section>
-        <section className="snacks areas" id="snacks">
-        </section>
-        <section className="drinks areas" id="drinks">
-        </section>
       </div>
-      <footer className="footer areas" id="footer">
-        </footer>
+      <div className="product-content">
+      <section className="sandwiches areas" id="sandwiches">
+      </section>
+      <section className="snacks areas" id="snacks">
+      </section>
+      <section className="drinks areas" id="drinks">
+      </section>
+      </div>
+    </div>
+    <footer className="footer areas" id="footer">
+      </footer>
   </>;
 }
 
