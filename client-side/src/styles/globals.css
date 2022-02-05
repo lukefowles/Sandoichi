@@ -5,6 +5,10 @@ html{
   scroll-padding-top: 10vh;
 }
 
+button{
+  cursor: pointer;
+}
+
 html,
 body {
   padding: 0;

@@ -4,6 +4,8 @@ nav {
     justify-content: space-between;
     height: 10vh;
     align-items: center;
+    width: 100vw;
+    overflow-x:hidden;
 }
 .navbar{
     position: sticky;

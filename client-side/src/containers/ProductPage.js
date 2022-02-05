@@ -22,7 +22,7 @@ function ProductPage({productType}) {
     })
 
 
-  return (<div id="sandwich-list" className="product-list">
+  return (<div className="product-list">
       {
           productList ?
 
