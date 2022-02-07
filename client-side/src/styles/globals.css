@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Pridi:wght@300;400&display=swap');
+
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: 10vh;
+}
+
+button{
+  cursor: pointer;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Pridi, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
