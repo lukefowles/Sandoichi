@@ -16,6 +16,9 @@ userRouter.post('/addUser/', userController.postNewUser)
 //Route to delete a user 
 userRouter.delete('/deleteUser/', userController.deleteUser)
 
+//Route to update a user
+userRouter.put('/updateUser/', userController.updateUser)
+
 
 
 export default userRouter;

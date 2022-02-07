@@ -86,16 +86,31 @@ function deleteUser(req, res) {
 //Function to update a user
 function updateUser(req, res) {
 
-    pool.query(`UPDATE users
-                SET name = $1, email = $2, address = $3, password = $4
-                WHERE email = $4`,
-                [req.body.name, req.body.email, req.body.address, req.body.password, req.body.email],
-                (err, result) => {
-                    
+    pool.query(`SELECT *
+                FROM users
+                WHERE email = $1`, [req.body.email], (err, result) => {
+                    if (err) throw err;
+
+                    if (result.rows.length === 0) {
+                        res.status(404).send('user with this email not found')
+                    }
+
+                    else{
+                        pool.query(`UPDATE users
+                        SET name = $1, email = $2, address = $3, password = $4
+                        WHERE email = $2`,
+                        [req.body.name, req.body.email, req.body.address, req.body.password],
+                        (err, result) => {
+                            
+                            if(err) throw err;
+        
+                            return res.status(200).send('User updated')
+                        })
+                    }
                 })
 
 }
 
 
 
-export default {getUsers, getUserByEmail, postNewUser, deleteUser}
+export default {getUsers, getUserByEmail, postNewUser, deleteUser, updateUser}
