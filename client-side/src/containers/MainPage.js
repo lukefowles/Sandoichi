@@ -4,6 +4,7 @@ import "../styles/productPage.css"
 import NavBar from "../components/NavBar"
 import LandingPage from './LandingPage';
 import ProductPage from './ProductPage';
+import Footer from '../components/Footer';
 
 function MainPage() {
   
@@ -24,6 +25,7 @@ function MainPage() {
       </section>
     </div>
     <footer className="footer areas" id="footer">
+      <Footer />
       </footer>
   </>;
 }
