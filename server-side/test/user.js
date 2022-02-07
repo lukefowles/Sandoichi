@@ -21,7 +21,7 @@ describe('User Routes', () => {
                     response.should.have.status(200)
                     response.body.should.be.a('array')
                     response.body.should.deep.equal([])
-                done();
+                    done();
                 })
         })
     })
@@ -30,12 +30,12 @@ describe('User Routes', () => {
     describe("POST /users/add", () => {
 
         it("It should save a new user to the database", (done) => {
-           
+
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
 
             chai.request(server)
@@ -44,7 +44,7 @@ describe('User Routes', () => {
                 .end((err, response) => {
                     response.should.have.status(200)
                     response.body.should.equal('User added!');
-                done();
+                    done();
                 })
 
         })
@@ -54,12 +54,12 @@ describe('User Routes', () => {
     describe("POST /users/add", () => {
 
         it("It should add a user and then throw an error when a user with a new email is added", (done) => {
-            
+
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
             chai.request(server)
                 .post('/users/add/')
@@ -69,12 +69,12 @@ describe('User Routes', () => {
                         .post('/users/add/')
                         .send(user)
                         .end((err, response) => {
-                        response.should.have.status(400)
-                        response.text.should.equal('Email already exists');
-                        done();
-                    })
+                            response.should.have.status(400)
+                            response.text.should.equal('Email already exists');
+                            done();
+                        })
                 })
-        })    
+        })
     })
 
     //Test to see if get all user route returns a user after one has been added to the database
@@ -83,27 +83,27 @@ describe('User Routes', () => {
         it("It should add a user, then return an array of length 1 with the added user", (done) => {
 
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
             chai.request(server)
                 .post('/users/add/')
                 .send(user)
                 .end((err, response) => {
                     chai.request(server)
-                    .get("/users/")
-                    .end((err, response) => {
-                        response.should.have.status(200)
-                        response.body.should.be.a('array')
-                        response.body.length.should.be.eql(1)
-                        response.body[0].name.should.deep.equal(user.name)
-                        response.body[0].email.should.deep.equal(user.email)
-                        response.body[0].address.should.deep.equal(user.address)
-                        done();
+                        .get("/users/")
+                        .end((err, response) => {
+                            response.should.have.status(200)
+                            response.body.should.be.a('array')
+                            response.body.length.should.be.eql(1)
+                            response.body[0].name.should.deep.equal(user.name)
+                            response.body[0].email.should.deep.equal(user.email)
+                            response.body[0].address.should.deep.equal(user.address)
+                            done();
+                        })
                 })
-            })
         })
     })
 
@@ -112,25 +112,25 @@ describe('User Routes', () => {
 
         it("Should post a new user, and then return 200 status and return json webtoken for successful login", (done) => {
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
             chai.request(server)
                 .post('/users/add/')
                 .send(user)
                 .end((err, response) => {
                     chai.request(server)
-                    .get('/users/login')
-                    .send({email: "Chet@johnmail.com", password: "Password"})
-                    .end((err, response) => {
-                        response.should.have.status(200)
-                        response.header['auth-token'].should.be.a('string')
-                    done();
-                    })
+                        .get('/users/login')
+                        .send({ email: user.email, password: user.password })
+                        .end((err, response) => {
+                            response.should.have.status(200)
+                            response.header['auth-token'].should.be.a('string')
+                            done();
+                        })
                 })
-        }) 
+        })
     })
 
     //Get a specific user by email
@@ -139,11 +139,11 @@ describe('User Routes', () => {
         it('Should add a user, login and get the user by email', (done) => {
 
             const user = {
-                        name : "Chet",
-                        email : "Chet@johnmail.com",
-                        address : "2 John St.",
-                        password : "Password"
-                    }
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
+            }
 
             chai.request(server)
                 .post('/users/add/')
@@ -151,13 +151,13 @@ describe('User Routes', () => {
                 .end((err, response) => {
                     chai.request(server)
                         .get('/users/login')
-                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .send({ email: "Chet@johnmail.com", password: "Password" })
                         .end((err, response) => {
                             let token = response.header['auth-token']
                             chai.request(server)
                                 .get('/users/user/')
                                 .set('auth-token', token)
-                                .send({email: "Chet@johnmail.com"})
+                                .send({ email: "Chet@johnmail.com" })
                                 .end((err, response) => {
                                     response.should.have.status(200);
                                     done();
@@ -168,10 +168,10 @@ describe('User Routes', () => {
 
         it('Should return an error if user email is not in the system', (done) => {
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
 
             chai.request(server)
@@ -180,13 +180,13 @@ describe('User Routes', () => {
                 .end((err, response) => {
                     chai.request(server)
                         .get('/users/login')
-                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .send({ email: "Chet@johnmail.com", password: "Password" })
                         .end((err, response) => {
                             let token = response.header['auth-token']
                             chai.request(server)
                                 .get('/users/user/')
                                 .set('auth-token', token)
-                                .send({email: "Che@johnmail.com"})
+                                .send({ email: "Che@johnmail.com" })
                                 .end((err, response) => {
                                     response.should.have.status(404)
                                     response.text.should.equal('Account with that email not found');
@@ -203,10 +203,10 @@ describe('User Routes', () => {
 
         it('should add a user and then remove it from the database', (done) => {
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
             chai.request(server)
                 .post('/users/add/')
@@ -214,7 +214,7 @@ describe('User Routes', () => {
                 .end((err, response) => {
                     chai.request(server)
                         .get('/users/login')
-                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .send({ email: "Chet@johnmail.com", password: "Password" })
                         .end((err, response) => {
                             let token = response.header['auth-token']
                             chai.request(server)
@@ -227,7 +227,7 @@ describe('User Routes', () => {
                                     chai.request(server)
                                         .get('/users/user/')
                                         .set('auth-token', token)
-                                        .send({email: "Chet@johnmail.com"})
+                                        .send({ email: "Chet@johnmail.com" })
                                         .end((err, response) => {
                                             response.should.have.status(404);
                                             response.text.should.equal('Account with that email not found')
@@ -245,17 +245,17 @@ describe('User Routes', () => {
 
         it('should add the user, login and then update it', (done) => {
             const user = {
-                name : "Chet",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chet",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
 
             const updatedUser = {
-                name : "Chad",
-                email : "Chet@johnmail.com",
-                address : "2 John St.",
-                password : "Password"
+                name: "Chad",
+                email: "Chet@johnmail.com",
+                address: "2 John St.",
+                password: "Password"
             }
             chai.request(server)
                 .post('/users/add/')
@@ -263,7 +263,7 @@ describe('User Routes', () => {
                 .end((err, response) => {
                     chai.request(server)
                         .get('/users/login')
-                        .send({email: "Chet@johnmail.com", password: "Password"}) 
+                        .send({ email: "Chet@johnmail.com", password: "Password" })
                         .end((err, response) => {
                             let token = response.header['auth-token']
                             chai.request(server)
@@ -278,16 +278,16 @@ describe('User Routes', () => {
                                     chai.request(server)
                                         .get('/users/user/')
                                         .set('auth-token', token)
-                                        .send({email: "Chet@johnmail.com"})
+                                        .send({ email: "Chet@johnmail.com" })
                                         .end((err, response) => {
                                             response.should.have.status(200);
                                             // response.body.name.should.deep.equal(updatedUser.name);
-                                        done();
-                                    })
+                                            done();
+                                        })
                                 })
-                        }) 
-                    })   
+                        })
+                })
         })
     })
-   
+
 })

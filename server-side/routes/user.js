@@ -106,10 +106,10 @@ userRouter.route('/login').get(async (req, res) => {
 
     //Create the JSON webtoke to be used in the session
     const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).send(token);
+    res.header('auth-token', token).send('Login successful');
 
     //login message
-    res.status(200).send('Login successful')
+    // res.status(200).send('Login successful')
 
 });
 
