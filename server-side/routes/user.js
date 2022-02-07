@@ -22,8 +22,16 @@ userRouter.get("/user", (req, res) => {
     auth(res, req)
 
     //logic to find correct details if token verified
-    User.find({email: req.body.email})
-    .then(users => res.json(users))
+
+    User.findOne({email: req.body.email})
+    .then(users => {
+            if(users) {
+                res.json(users)
+            }
+            else {
+                res.status(404).send('Account with that email not found')
+            }
+    })
     .catch(err => res.status(400).json('Error: ' + err)) 
  
 })
@@ -34,7 +42,7 @@ userRouter.route("/user/:id").get((req, res) => {
 
     auth(res, req);
 
-    User.find({id: req.params.id})
+    User.findOne({id: req.params.id})
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Error: ' + err))  
 })
@@ -76,7 +84,7 @@ userRouter.route('/add').post( async (req, res) => {
 
     //Save the new user
     newUser.save()
-        .then(() => res.json('User added!'))
+        .then(() =>{ res.json('User added!')})
         .catch(err => res.status(400).json('Error: ' + err))
         // .then(() => res.status(200).res.send("Logged in succesfully"))
     
@@ -101,22 +109,22 @@ userRouter.route('/login').get(async (req, res) => {
     res.header('auth-token', token).send(token);
 
     //login message
-    return res.status(200).send("Logged in succesfully")
+    res.status(200).send('Login successful')
 
 });
 
 
 //update a user
-userRouter.put('/update/:id', (req, res) => {
-    User.findById(req.params.id) 
+userRouter.put('/update', (req, res) => {
+    User.findOne({email: req.headers['email']}) 
         .then(user => {
-            // user = req.body;
+            
             user.name = req.body.name;
             user.email = req.body.email;
             user.address = req.body.address;
-            // user.orders = req.
+            
             user.save()
-                .then(() => res.json('Updated'))
+                .then(() => res.send('Updated'))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err))
@@ -136,12 +144,12 @@ userRouter.put('/update/:id', (req, res) => {
 
 
 //delete a user
-userRouter.route('/delete/:id').delete((req, res) => {
+userRouter.route('/delete/:email').delete((req, res) => {
 
     //Authentication
     auth(res, req);
 
-    User.findByIdAndDelete(req.params.id)
+    User.findOneAndDelete({email:req.params.email})
     .then(() => res.json('User deleted')
     .catch(err => res.status(400).json('Error: ' + err)))
 });
