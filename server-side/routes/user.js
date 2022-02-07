@@ -3,7 +3,7 @@ import User from '../models/user-model.js'
 import {registerValidation, loginValidation} from '../services/validation.js'
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import {auth} from './tokenRoute.js'
+import auth from './tokenRoute.js'
 
 const userRouter = new Router();
 
@@ -16,16 +16,23 @@ userRouter.route('/').get((req, res) => {
 
 
 //get a specific user by email
+userRouter.get("/user", (req, res) => {
 
-userRouter.route("/user").get((req, res) => {
+    //Use auth function to validate the JSON web token passed into the header
+    auth(res, req)
 
+    //logic to find correct details if token verified
     User.find({email: req.body.email})
-        .then(users => res.json(users))
-        .catch(err => res.status(400).json('Error: ' + err))  
+    .then(users => res.json(users))
+    .catch(err => res.status(400).json('Error: ' + err)) 
+ 
 })
 
 //get a specific user by Id
+//n.b. the two separate ways to implement routes from the userRouter
 userRouter.route("/user/:id").get((req, res) => {
+
+    auth(res, req);
 
     User.find({id: req.params.id})
         .then(users => res.json(users))
@@ -35,6 +42,9 @@ userRouter.route("/user/:id").get((req, res) => {
 
 //get all user orders
 userRouter.route("/orders/:id").get((req, res)=> {
+
+    auth(res, req);
+
     User.findOne({ _id: req.params.id })
     .then(user => user.populate('orders'))
     .then(user => res.json(user.orders))
@@ -68,31 +78,36 @@ userRouter.route('/add').post( async (req, res) => {
     newUser.save()
         .then(() => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err))
-        .then(() => res.status(200).res.send("Logged in succesfully"))
+        // .then(() => res.status(200).res.send("Logged in succesfully"))
     
 });
 
 //Login user
 userRouter.route('/login').get(async (req, res) => {
+
+    //validation for login
     const validation = loginValidation(req.body);
     if (validation.error) return res.status(400).send(validation.error.details[0].message);
 
     const user = await User.findOne({email: req.body.email})
     if(!user) return res.status(400).send('Email or password incorrect');
 
+    //Check the password matches the hashed password in the database
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if(!validPassword) return res.status(400).send('Invalid password');
 
+    //Create the JSON webtoke to be used in the session
     const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET)
     res.header('auth-token', token).send(token);
 
+    //login message
     return res.status(200).send("Logged in succesfully")
 
 });
 
 
 //update a user
-userRouter.put('/update/:id', auth, (req, res) => {
+userRouter.put('/update/:id', (req, res) => {
     User.findById(req.params.id) 
         .then(user => {
             // user = req.body;
@@ -122,6 +137,10 @@ userRouter.put('/update/:id', auth, (req, res) => {
 
 //delete a user
 userRouter.route('/delete/:id').delete((req, res) => {
+
+    //Authentication
+    auth(res, req);
+
     User.findByIdAndDelete(req.params.id)
     .then(() => res.json('User deleted')
     .catch(err => res.status(400).json('Error: ' + err)))
