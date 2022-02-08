@@ -91,7 +91,7 @@ userRouter.route('/add').post( async (req, res) => {
 });
 
 //Login user
-userRouter.route('/login').get(async (req, res) => {
+userRouter.route('/login').post(async (req, res) => {
 
     //validation for login
     const validation = loginValidation(req.body);
