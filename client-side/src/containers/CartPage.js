@@ -1,5 +1,6 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import "../styles/cartPage.css";
 
 function CartPage() {
@@ -8,6 +9,8 @@ function CartPage() {
   const [checkoutProgress, setCheckoutProgress] = useState("cart")
   const [postCode, setPostCode] = useState();
   const [addressOptions, setAddressOptions] = useState();
+  const orderItems = useSelector(state => state.orders.items)
+  const orderTotal = useSelector(state => state.orders.totalCost)
 
   
 
@@ -56,7 +59,9 @@ function CartPage() {
         <div className="cart">
         <h1>Complete your order</h1>
         <div className="cart-area">
-          <div className="cart-item-list"></div>
+          <div className="cart-item-list">
+
+          </div>
           <div className="cart-sidebar">
             <div className="order-info"></div>
           <button onClick={progressThroughCheckout}><h2>Proceed to checkout</h2></button>

@@ -5,7 +5,19 @@ console.log(order)
 
 export const orderSlice = createSlice({
     name: "order",
-    initialState: {items:order ? [order.items] : [], totalCost: order? order.totalCost : 0 },
+    initialState: {
+        items: order ? order.items.map( item =>{
+            return {
+                id: parseInt(item.id),
+                type: item.type,
+                name: item.name,
+                price: parseFloat(item.price),
+                src: item.src,
+            }
+        }) 
+        : [], 
+        totalCost: order? parseFloat(order.totalCost) : 0 
+    },
     reducers:{addItem: (state, action) => {
         action ?
             state.items.push(action.payload)

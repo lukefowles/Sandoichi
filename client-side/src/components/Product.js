@@ -25,7 +25,7 @@ function Product({product}) {
           <h3>{quantity}</h3>
           <button onClick={handleAdd}>+</button>
         </div>
-        <AddToCart item={product}/>
+        <AddToCart item={product} quantity={quantity}/>
   </div>);
 }
 export default Product;
