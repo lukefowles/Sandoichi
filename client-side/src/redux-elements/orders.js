@@ -1,8 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit"
 
+const order = JSON.parse( sessionStorage.getItem("currentOrder"))
+console.log(order)
+
 export const orderSlice = createSlice({
     name: "order",
-    initialState: {items:[], totalCost:0},
+    initialState: {items:order ? [order.items] : [], totalCost: order? order.totalCost : 0 },
     reducers:{addItem: (state, action) => {
         action ?
             state.items.push(action.payload)

@@ -5,13 +5,16 @@ import {addItem, updateTotal} from "../redux-elements/orders"
 function AddToCart({item}) {
 
     const dispatch = useDispatch();
+    const order = useSelector(state => state.orders)
 
     const addCurrentItemAndUpdateTotal = (item) => {
         dispatch(addItem(item))
         dispatch(updateTotal())
-    }
 
-    console.log(useSelector(state => state.orders))
+        const orderString = JSON.stringify(order)
+
+        sessionStorage.setItem("currentOrder", orderString)
+    }
 
   return (
       <button onClick={() => addCurrentItemAndUpdateTotal(item)}><h2>Add To Cart</h2></button>
