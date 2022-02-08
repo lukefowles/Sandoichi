@@ -9,4 +9,15 @@ function getAllOrders(req, res) {
     })  
 }
 
-export default {getAllOrders}
+async function getOrder(id) {
+    
+    return await pool.query(`SELECT * 
+                FROM orders
+                WHERE order_id =$1`, [id], async (err, result) => {
+                    if (err) throw err;
+                    console.log(result.rows[0]);
+                    return await result.rows[0];
+                })
+}
+
+export default {getAllOrders, getOrder}

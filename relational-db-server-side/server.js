@@ -1,5 +1,6 @@
 import express from 'express'
 import userRouter from './routes/user-route.js'
+import orderRouter from './routes/order-routes.js';
 
 const app = express();
 const port = 5000;

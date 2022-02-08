@@ -6,3 +6,5 @@ class Item {
         this.price = price;
     }
 }
+
+export default Item

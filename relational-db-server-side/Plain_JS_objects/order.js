@@ -1,6 +1,7 @@
 class Order {
 
     items = [];
+    totalCost = 0;
 
     constructor(totalCost, deliveryAddress, userId) {
         this.totalCost = totalCost;
@@ -14,3 +15,5 @@ class Order {
     }
 
 }
+
+export default Order
