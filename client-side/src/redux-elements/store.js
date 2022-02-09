@@ -4,15 +4,52 @@ import userReducer from "./user";
 import productsReducer from "./products"
 import orderReducer from "./orders"
 import thunkMiddleware from "redux-thunk";
+import storage from 'redux-persist/lib/storage'
+import { combineReducers } from "redux";
+import {
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER
+} from 'redux-persist'
 
+//Create store object to persist in storage
+//Key specifies the id of the object and the storage the type of storage used
+const persistConfig = {
+    key: 'store',
+    storage
+}
+
+//Combine the reduces
+const reducers = combineReducers({carousel: carouselReducer, user: userReducer,
+     products: productsReducer, orders: orderReducer})
+
+//Create a persistent reducer
+const persistentReducer = persistReducer(persistConfig, reducers)
+
+
+//Configure the store
 const store = configureStore({
-    reducer: {
-        carousel: carouselReducer,
-        user: userReducer,
-        products: productsReducer,
-        orders: orderReducer
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware)
+    // Without use of redux persist
+    // reducer: {
+    //     carousel: carouselReducer,
+    //     user: userReducer,
+    //     products: productsReducer,
+    //     orders: orderReducer
+    // },
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware)
+
+    reducer: persistentReducer,
+
+    
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck : {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        }
+    })
 });
 
 export default store;
