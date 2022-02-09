@@ -5,11 +5,37 @@ import NavBar from "../components/NavBar"
 import LandingPage from './LandingPage';
 import ProductPage from './ProductPage';
 import Footer from '../components/Footer';
+import {useState, useEffect} from 'react';
+import LoginModal from '../components/LoginModal'
+import axios from 'axios'
 
 function MainPage() {
+
+  //State to monitor login modal
+  const[showLogin, setShowLogin] = useState(false);
+
+  //Function which changes the state of login modal
+  function changeShowLogin() {
+    setShowLogin(!showLogin)
+    console.log('works')
+  }
+  
+  //Function to handle login submit
+  function onLoginSubmit(email, password) {
+    axios.post('http://localhost:5000/users/login', 
+    {
+      "email": email,
+      "password": password
+  
+    })
+    .then((result) => {localStorage.setItem('token', result.headers['auth-token'])
+    console.log(result.body)})
+    .catch((err) => alert(err.response.data))
+  }
   
   return <>
-    <NavBar/>
+    <NavBar changeShowLogin={changeShowLogin}/>
+    <LoginModal onLoginSubmit={onLoginSubmit} showLogin={showLogin}/>
     <section className="landing-page" id="landing-page">
       <LandingPage/>
     </section>
