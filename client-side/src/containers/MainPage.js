@@ -8,11 +8,17 @@ import Footer from '../components/Footer';
 import {useState, useEffect} from 'react';
 import LoginModal from '../components/LoginModal'
 import axios from 'axios'
+import {useSelector, useDispatch} from 'react-redux'
+import {changeName, changeEmail, changeOrders, changePassword, changeAddress} from '../redux-elements/user';
+
 
 function MainPage() {
 
   //State to monitor login modal
   const[showLogin, setShowLogin] = useState(false);
+
+  const user = useSelector((state) => state.user.user)
+  const dispatch = useDispatch();
 
   //Function which changes the state of login modal
   function changeShowLogin() {
@@ -37,7 +43,15 @@ function MainPage() {
           "email": email
         }
       })
-      .then((result) => console.log(result))
+      .then((result) => {
+        // console.log(result.data.name);
+        dispatch(changeName(String(result.data.name)))
+        dispatch(changeEmail(String(result.data.email)));
+        dispatch(changeAddress(String(result.data.address)));
+        dispatch(changePassword(String(result.data.password)));
+        dispatch(changeOrders(Array(result.data.orders)));
+      })
+      .then(() => {console.log(user)})
     })
     .catch((err) => alert(err.response.data))
   }
