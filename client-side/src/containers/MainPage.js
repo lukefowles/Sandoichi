@@ -22,14 +22,23 @@ function MainPage() {
   
   //Function to handle login submit
   function onLoginSubmit(email, password) {
-    axios.post('http://localhost:5000/users/login', 
+    axios.post('/users/login', 
     {
       "email": email,
       "password": password
   
     })
-    .then((result) => {localStorage.setItem('token', result.headers['auth-token'])
-    console.log(result.body)})
+    .then((result) => {
+      // localStorage.setItem('token', result.headers['auth-token'])
+      alert(result.data)
+      //Then get the user information to store in state
+      axios.get('/users/user', {
+        headers: {
+          "email": email
+        }
+      })
+      .then((result) => console.log(result))
+    })
     .catch((err) => alert(err.response.data))
   }
   
