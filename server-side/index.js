@@ -8,6 +8,7 @@ import {Mockgoose} from 'mockgoose';
 // import auth from './routes/auth.js';
 import userRouter from './routes/user.js';
 import orderRouter from "./routes/order.js"
+import cookieParser from 'cookie-parser'
 // import {auth} from "./routes/tokenRoute.js"
 
 dotenv.config();
@@ -15,9 +16,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000
 
-app.use(cors());
+app.use(cors({exposedHeaders:['auth-token']}));
 app.use(express.json());
 // app.use(auth);
+app.use(cookieParser());
 
 const uri = process.env.ATLAS_URI;
 

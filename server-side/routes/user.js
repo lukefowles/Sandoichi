@@ -23,7 +23,7 @@ userRouter.get("/user", (req, res) => {
 
     //logic to find correct details if token verified
 
-    User.findOne({email: req.body.email})
+    User.findOne({email: req.headers.email})
     .then(users => {
             if(users) {
                 res.json(users)
@@ -91,7 +91,7 @@ userRouter.route('/add').post( async (req, res) => {
 });
 
 //Login user
-userRouter.route('/login').get(async (req, res) => {
+userRouter.route('/login').post(async (req, res) => {
 
     //validation for login
     const validation = loginValidation(req.body);
@@ -106,7 +106,7 @@ userRouter.route('/login').get(async (req, res) => {
 
     //Create the JSON webtoke to be used in the session
     const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).send('Login successful');
+    res.cookie('auth-token', token, {httpOnly: true}).send('Login successful');
 
     //login message
     // res.status(200).send('Login successful')
