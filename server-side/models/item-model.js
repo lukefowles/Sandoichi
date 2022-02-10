@@ -6,14 +6,14 @@ const itemSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
         trim: true,
         minlength: 1
     },
     type: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
         trim: true,
         minlength: 1
     },

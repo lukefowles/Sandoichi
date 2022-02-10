@@ -2,6 +2,7 @@ import {Router} from 'express';
 import Order from '../models/order-model.js';
 import User from '../models/user-model.js';
 import mongoose from 'mongoose';
+import auth from './tokenRoute.js'
 
 const orderRouter = new Router();
 
@@ -14,6 +15,9 @@ orderRouter.route("/").get((req, res) => {
 
 //get orders by user
 orderRouter.route("/user-orders/:id").get((req, res) => {
+
+    auth(res, req);
+
     Order.find({user: req.params.id})
     .then(orders => res.json(orders))
     .catch(err => res.status(400).json('Error: ' + err))  
@@ -21,6 +25,9 @@ orderRouter.route("/user-orders/:id").get((req, res) => {
 
 //create an order
 orderRouter.route("/add").post((req, res) => {
+
+    auth(res, req);
+
     const newOrder = new Order(req.body);
 
     //Save order
@@ -65,18 +72,25 @@ orderRouter.route("/delete/:orderId/:userId").delete((req, res) => {
 
     Order.findById(req.params.orderId)
     .then(order => orderID = order._id)
+    // .then(() => {
+    //     User.findById(req.params.userId)
+    //         .then((user) => {
+    //             console.log(orderID)
+    //             console.log(mongoose.Types.ObjectId(req.params.orderId));
+    //             console.log(user.orders);
+    //             user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
+    //             console.log(user.orders);
+    //             user.save(user)
+    //             .catch(err => res.status(400).json('Error: ' + err))  
+    //         })
+    // })
     .then(() => {
-        User.findById(req.params.userId)
-            .then((user) => {
-                console.log(orderID)
-                console.log(mongoose.Types.ObjectId(req.params.orderId));
-                console.log(user.orders);
-                user.orders = user.orders.filter(order => order !== mongoose.Types.ObjectId(req.params.orderId));
-                console.log(user.orders);
-                user.save(user)
-                .catch(err => res.status(400).json('Error: ' + err))  
-            })
+        User.findOneAndUpdate({_id: req.params.userId}, {$pull : {orders: req.params.orderId}}, (err, data) => {
+            if (err) {
+                return res.status(500).json({ error: 'error in deleting address' });
+            }})
     })
+    .then(() => Order.findByIdAndDelete(orderID))
     .then(() => res.json('Order deleted'))
     .catch(err => res.status(400).json('Error: ' + err));
     

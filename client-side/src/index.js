@@ -4,6 +4,12 @@ import App from './App';
 import {Provider} from "react-redux";
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from "./redux-elements/store";
+import {persistStore} from 'redux-persist';
+import {PersistGate} from 'redux-persist/integration/react';
+
+//Configure store object so compatible with PersistGate- which enables persistence of store data
+let persistor = persistStore(store);
+
 //STORE -> GLOBALISED STATE
 
 //ACTION -> THE TYPE OF ACTION
@@ -15,9 +21,11 @@ import store from "./redux-elements/store";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-      <App />
-      </Router>
+      <PersistGate persistor={persistor}>
+        <Router>
+        <App />
+        </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
