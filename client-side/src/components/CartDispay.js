@@ -15,7 +15,7 @@ function CartDispay({progressThroughCheckout, orderItems}) {
     </div>
     <div className="cart-sidebar">
       <div className="order-info"></div>
-    <button onClick={progressThroughCheckout}><h2>Proceed to checkout</h2></button>
+    <button onClick={progressThroughCheckout}><h2>Proceed to payment</h2></button>
     </div>
   </div> </div>;
 }
