@@ -10,6 +10,8 @@
     height: 75vh;
     border: 3px solid black;
     margin-right: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
 
@@ -28,4 +30,9 @@
 
 .order-info{
     height: 60vh;
+}
+
+.cart-item-list{
+    display: flex;
+    flex-direction: column;
 }

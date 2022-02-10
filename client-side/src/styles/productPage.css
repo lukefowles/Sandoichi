@@ -6,6 +6,18 @@
     flex-direction: column;
 }
 
+.product-inCart{
+    width: 70vw;
+    height:300px;
+    margin: 10px 30px 10px 30px;
+    display: flex;
+    gap: 2rem;
+}
+.product-inCart > img{
+    width: 110px;
+    height: 80px;
+}
+
 .product > img{
     width: 250px;
     height: 175px;

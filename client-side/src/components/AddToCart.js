@@ -7,16 +7,26 @@ function AddToCart({item, quantity}) {
     const dispatch = useDispatch();
     const order = useSelector(state => state.orders)
 
-    const addCurrentItemAndUpdateTotal = (item, quantity) => {
-        
-        for(let i = 0; i < quantity; i++){
-            dispatch(addItem(item))
+    const addCurrentItemAndUpdateTotal = (item, addedQuantity) => {
+        order.items.forEach(currentItem =>{
+            if(currentItem.name == item.name){
+                currentItem.quantity += 1;
+                currentItem.totalPrice = currentItem.quantity * currentItem.price;
+                dispatch(updateTotal())
+                return;
+            }
+        } )
+        if(quantity > 0){
+            dispatch(addItem({...item, quantity: addedQuantity, totalPrice: item.price * addedQuantity}))
             dispatch(updateTotal())
+        }if(quantity <= 0){
+            return;
         }
 
         const orderString = JSON.stringify(order)
 
         sessionStorage.setItem("currentOrder", orderString)
+        console.log(sessionStorage.getItem("currentOrder"))
     }
 
   return (

@@ -12,6 +12,7 @@ export const orderSlice = createSlice({
                 type: item.type,
                 name: item.name,
                 price: parseFloat(item.price),
+                quantity: parseInt(item.quantity),
                 src: item.src,
             }
         }) 
@@ -27,7 +28,7 @@ export const orderSlice = createSlice({
     updateTotal: (state) => {
         if(state.items.length > 0){
             let total = 0;
-            state.items.forEach(item => total += item.price)
+            state.items.forEach(item => total += item.totalPrice)
             state.totalCost = (Math.round(total * 100) / 100).toFixed(2);
         }
         else{
