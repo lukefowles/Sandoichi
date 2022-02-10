@@ -4,7 +4,7 @@ import '../styles/usermodal.css'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 
-function LoginModal({ onLoginSubmit, showLogin, signUp, changeSignUp}) {
+function LoginModal({ onLoginSubmit, showLogin, signUp, changeSignUp, onSignUpSubmit}) {
 
     const showLoginModal = showLogin ? "modal display-block" : "modal display-none"
 
@@ -47,7 +47,7 @@ function LoginModal({ onLoginSubmit, showLogin, signUp, changeSignUp}) {
         <div className={showLoginModal}>
             <div className="loginModal">
                 <h2 className="signUpForm">Sign Up Form</h2>
-                <SignUpForm/>
+                <SignUpForm onSignUpSubmit={onSignUpSubmit}/>
             </div>
 
         </div>

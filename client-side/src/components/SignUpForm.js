@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 
-function SignUpForm() {
+function SignUpForm({onSignUpSubmit}) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
@@ -21,13 +21,13 @@ function SignUpForm() {
     }
 
     const handleAddressChange = (event) => {
-        setEmail(event.target.value)
+        setAddress(event.target.value)
     }
 
     const handleFormSubmission = (event) => {
         event.preventDefault();
 
-        // onLoginSubmit(email, password)
+        onSignUpSubmit(email, password, name, address)
 
         setEmail("")
         setPassword("")
@@ -39,7 +39,7 @@ function SignUpForm() {
         <form className="loginForm" onSubmit={handleFormSubmission}>
                     <div className="form-element">
                         <label htmlFor="name">Name:</label>
-                        <input type="text" id="name" value={password} onChange={handleNameChange} />
+                        <input type="text" id="name" value={name} onChange={handleNameChange} />
                     </div>
                     <div className="form-element">
                         <label htmlFor="email">Email:</label>

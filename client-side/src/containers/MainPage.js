@@ -64,11 +64,21 @@ function MainPage() {
     .catch((err) => alert(err.response.data))
   }
 
-  // function onSignUpSubmit
+  function onSignUpSubmit(email, password, name, address) {
+    axios.post('/users/add', {
+      "email": email,
+      "name": name,
+      "password": password,
+      "address": address
+    })
+    .catch((err) => alert(err.response.data))
+    .then(() => onLoginSubmit(email,password))
+  }
   
   return <>
     <NavBar changeShowLogin={changeShowLogin}/>
-    <LoginModal onLoginSubmit={onLoginSubmit} showLogin={showLogin} signUp={signUp} changeSignUp={changeSignUp}/>
+    <LoginModal onLoginSubmit={onLoginSubmit} showLogin={showLogin} signUp={signUp}
+     changeSignUp={changeSignUp} onSignUpSubmit={onSignUpSubmit}/>
     <section className="landing-page" id="landing-page">
       <LandingPage/>
     </section>
