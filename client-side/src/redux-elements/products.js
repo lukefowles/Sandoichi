@@ -20,138 +20,138 @@ import pimms from "../img/img/pimms.png"
 
 export const productsSlice = createSlice({
     name: "sandwiches",
-    initialState:{ sandwichList :[
-            {
+    initialState:{ sandwichList :{
+           1: {
                 id: 1,
                 type: "sandwich",
                 name: "Roast Beef & Horseradish",
                 price: 4.95,
                 src: beef
             },
-            {
+           2: {
                 id: 2,
                 type: "sandwich",
                 name: "Smoked Salmon & Avocado",
                 price: 5.15,
                 src: salmon
             },
-            {
+           3: {
                 id: 3,
                 type: "sandwich",
                 name: "Coronation Chicken",
                 price: 4.55,
                 src: chicken
             },
-            {
+           4: {
                 id: 4,
                 type: "sandwich",
                 name: "Bacon, Lettuce & Tomato",
                 price: 4.25,
                 src: bacon
             },
-            {
+           5: {
                 id: 5,
                 type: "sandwich",
                 name: "Prawn Cocktail",
                 price: 4.25,
                 src: shrimp
             },
-            {
+           6: {
                 id: 6,
                 type: "sandwich",
                 name: "Custom Sandwich",
                 price: 5.15,
                 src: custom
             }
-        ],
-        sideList: [
-            {
+        },
+        sideList: {
+           1: {
                 id: 1,
                 type: "side",
                 name: "Cajun Wedges",
                 price: 3.75,
                 src: cajun
             },
-            {
+           2: {
                 id: 2,
                 type: "side",
                 name: "Kale crisps",
                 price: 2.15,
                 src: kale
             },
-            {
+           3: {
                 id: 3,
                 type: "side",
                 name: "Coleslaw",
                 price: 3.15,
                 src: coleslaw
             },
-            {
+           4: {
                 id: 4,
                 type: "side",
                 name: "Fruit Salad",
                 price: 2.99,
                 src: fruit
             },
-            {
+           5: {
                 id: 5,
                 type: "side",
                 name: "Sweet Potato crisps",
                 price: 2.15,
                 src: sweet
             },
-            {
+           6: {
                 id: 6,
                 type: "side",
                 name: "Soup",
                 price: 3.45,
                 src: soup
             }
-        ],
-        drinkList: [
-            {
+        },
+        drinkList: {
+            1: {
                 id: 1,
                 type: "drink",
                 name: "Freshly pressed apple juice",
                 price: 3.75,
                 src: apple
             },
-            {
+            2: {
                 id: 2,
                 type: "drink",
                 name: "Homemade Ginger Beer",
                 price: 2.15,
                 src: ginger
             },
-            {
+            3: {
                 id: 3,
                 type: "drink",
                 name: "Fairtrade filter coffee",
                 price: 3.15,
                 src: coffee
             },
-            {
+            4: {
                 id: 4,
                 type: "drink",
                 name: "Fairtrade hot chocolate",
                 price: 2.99,
                 src: cocoa
             },
-            {
+            5: {
                 id: 5,
                 type: "drink",
                 name: "Organic earl grey",
                 price: 2.15,
                 src: tea
             },
-            {
+            6: {
                 id: 6,
                 type: "drink",
                 name: "0% fruit punch",
                 price: 3.45,
                 src: pimms
             }
-        ]
+        }
     }
 })
 

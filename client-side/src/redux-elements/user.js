@@ -47,6 +47,6 @@ export default userSlice.reducer;
 // 2. const user = useSelector((state) => state.user.value)
 // When you want to change the state (for example using the login reducer), you need to
 // 1. import {useDispatch} from "react-redux"
-// 2. const dispatch = useDispatch(login({keys and values of the info you want to change}));
-// 3. dispatch()
+// 2. const dispatch = useDispatch();
+// 3. dispatch(login({keys and values of the info you want to change}))
 

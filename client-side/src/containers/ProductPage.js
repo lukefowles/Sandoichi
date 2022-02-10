@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux"
-import Sandwich from '../components/Product';
+import Product from '../components/Product';
 import "../styles/productPage.css"
 
 
@@ -26,9 +26,9 @@ function ProductPage({productType}) {
       {
           productList ?
 
-          productList.map(product => {
+          Object.values(productList).map(product => {
               return(
-                  <Sandwich key={product.id} product={product}/>
+                  <Product key={product.id} product={product} inCart={false}/>
               )
           }
         )
