@@ -1,5 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import '../styles/usermodal.css'
+
 
 function LoginModal({onLoginSubmit, showLogin}) {
 
@@ -27,8 +29,8 @@ function LoginModal({onLoginSubmit, showLogin}) {
 
     return (
     <div className={showLoginModal}>
-        <h2>Login Form</h2>
-        <form onSubmit={handleFormSubmission}>
+        <h2 className="loginForm">Login Form</h2>
+        <form className="loginForm" onSubmit={handleFormSubmission}>
             <div className = "form-element">
                 <label htmlFor="email">Email:</label>
                 <input type="text" id="email" value={email} onChange={handleEmailChange} />
