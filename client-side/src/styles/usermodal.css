@@ -1,8 +1,8 @@
 .modal {
     position: fixed;
     top: 30vh;
-    left: 30vw;
-    width: 40vw;
+    left: 35vw;
+    width: 30vw;
     height: 40vh; 
     background: rgba(238, 230, 230, 0.9);
     z-index: 2;
@@ -17,6 +17,13 @@
   
   .display-none {
     display: none;
+  }
+
+  .loginModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .loginForm {
@@ -42,5 +49,26 @@
 .form-element > input{
     display: flex;
     width: 10em;
+}
+
+.signUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#signUpButton {
+  appearance: auto;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    color: -internal-light-dark(black, white);
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
 }
   
