@@ -1,39 +1,80 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useDispatch} from 'react-redux'
 import '../styles/usermodal.css'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
+import axios from "axios";
+import {changeName, changeEmail, changeOrders, changePassword, changeAddress} from '../redux-elements/user';
+import {logIn, logOut} from '../redux-elements/login'
 
-function LoginModal({ onLoginSubmit, showLogin, signUp, changeSignUp, onSignUpSubmit}) {
+function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogin, user}) {
 
-    const showLoginModal = showLogin ? "modal display-block" : "modal display-none"
+    const showLoginModal = showLogin ? "modal display-block" : "modal display-none";
+    
+    const dispatch = useDispatch();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value)
+    const logout = () => {
+        dispatch(logOut())
     }
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
-    }
+     //Function which changes state of sign up form
+  function changeSignUp() {
+    setShowSignUp(!signUp)
+  }
+  
+  //Function to handle login submit
+  function onLoginSubmit(email, password) {
+    axios.post('/users/login', 
+    {
+      "email": email,
+      "password": password
+  
+    })
+    .then((result) => {
+      // localStorage.setItem('token', result.headers['auth-token'])
+      alert(result.data)
+      //Then get the user information to store in state
+      axios.get('/users/user', {
+        headers: {
+          "email": email
+        }
+      })
+      .then((result) => {
+        // console.log(result.data.name);
+        dispatch(changeName(String(result.data.name)))
+        dispatch(changeEmail(String(result.data.email)));
+        dispatch(changeAddress(String(result.data.address)));
+        dispatch(changePassword(String(result.data.password)));
+        dispatch(changeOrders(Array(result.data.orders)));
+        dispatch(logIn());
+        changeShowLogin()
+      })
+      .then(() => {console.log(user)})
+    })
+    .catch((err) => alert(err.response.data))
+  }
 
-    const handleFormSubmission = (event) => {
-        event.preventDefault();
+    function onSignUpSubmit(email, password, name, address) {
+        axios.post('/users/add', {
+          "email": email,
+          "name": name,
+          "password": password,
+          "address": address
+        })
+        .catch((err) => alert(err.response.data))
+        .then(() => onLoginSubmit(email,password))
+      }
 
-        onLoginSubmit(email, password)
-
-        setEmail("")
-        setPassword("")
-    }
-
-    return (
-        !signUp
-         
-        ?
-
-        <div className={showLoginModal}>
+    const renderSwitch = () => {
+        if(loggedIn){
+            console.log(loggedIn)
+            return <div className={showLoginModal}>
+                <button onClick={logout}>Log out</button>
+            </div>
+            
+        }
+        else if(!signUp){
+        return <div className={showLoginModal}>
             <div className="loginModal">
                 <h2 className="loginForm">Login Form</h2>
                 <LoginForm  onLoginSubmit={onLoginSubmit}/>
@@ -42,16 +83,20 @@ function LoginModal({ onLoginSubmit, showLogin, signUp, changeSignUp, onSignUpSu
             </div>
         </div>
 
-        :
+        }else{
 
-        <div className={showLoginModal}>
+        return <div className={showLoginModal}>
             <div className="loginModal">
                 <h2 className="signUpForm">Sign Up Form</h2>
                 <SignUpForm onSignUpSubmit={onSignUpSubmit}/>
             </div>
 
         </div>
-    )
-}
+        }
+    }
 
+
+    return <>{renderSwitch()}</>
+    
+}
 export default LoginModal;

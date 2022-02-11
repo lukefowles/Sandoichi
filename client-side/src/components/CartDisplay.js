@@ -3,13 +3,20 @@ import Product from './Product';
 import amex from "../img/img/amex (1).png";
 import visa from "../img/img/visa (1).png";
 import mastercard from "../img/img/mastercard (1).png";
+import LoginModal from '../components/LoginModal';
+import {useSelector} from "react-redux";
+import {useState} from "react";
 
-function CartDisplay({progressThroughCheckout, orderItems, orderTotal}) {
+function CartDisplay({progressThroughCheckout, orderItems, orderTotal, showLogin, signUp, setShowSignUp,changeShowLogin, loggedIn, user }) {
 
   const deliveryCharge = 4.25
   const totalWithDelivery = parseFloat(orderTotal) + deliveryCharge;
 
+  //State to monitor login modal
+  
+
   return <div className="cart">
+  <LoginModal showLogin={showLogin} loggedIn={loggedIn} signUp={signUp} setShowSignUp={setShowSignUp} changeShowLogin={changeShowLogin} user={user}/>  
   <h1>Complete your order</h1>
   <div className="cart-area">
     <div className="cart-item-list">

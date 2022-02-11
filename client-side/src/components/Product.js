@@ -25,7 +25,7 @@ function Product({product, inCart, selectedQuantity}) {
       <div className="product-inCart">
       <img src={product.src} alt={product.name}/>
         <h3>{product.name}</h3>
-        <h4>£{product.price}</h4>
+        <h4>£{(Math.round(product.totalPrice * 100) / 100).toFixed(2)}</h4>
           <h3>{quantity}</h3>
   </div>
       )

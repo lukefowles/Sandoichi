@@ -1,10 +1,10 @@
-import { createDraftSafeSelector } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import "../styles/cartPage.css";
 import CartDisplay from '../components/CartDisplay';
 import AddressDisplay from '../components/AddressDisplay';
 import PaymentDisplay from '../components/PaymentDisplay';
+
 
 function CartPage() {
   const apiKey = "8D_nhIQ030eXrUffBWulyA34206"
@@ -15,12 +15,30 @@ function CartPage() {
   const orderItems = useSelector(state => state.orders.items)
   const orderTotal = useSelector(state => state.orders.totalCost)
 
+  const[showLogin, setShowLogin] = useState(false);
+  const [signUp, setShowSignUp] = useState(false)
   
+
+  const user = useSelector((state) => state.user.user)
+  const loggedIn = useSelector((state) => state.loggedIn.loggedIn)
+
+  //Function which changes the state of login modal
+  
+  function changeShowLogin() {
+    setShowSignUp(false)
+    setShowLogin(!showLogin)
+    console.log('works')
+  }
+ 
 
   const progressThroughCheckout = () => {
     switch(checkoutProgress){
-      case "cart": 
-        setCheckoutProgress("address");
+      case "cart":
+        if(loggedIn){
+          setCheckoutProgress("address")
+        }else{
+          changeShowLogin();
+        }
         break;
       case "address":
         setCheckoutProgress("payment");
@@ -59,7 +77,7 @@ function CartPage() {
     switch(checkoutProgress){
       case "cart":
         return(
-          <CartDisplay progressThroughCheckout={progressThroughCheckout} orderItems={orderItems} orderTotal={orderTotal}/>
+          <CartDisplay progressThroughCheckout={progressThroughCheckout} orderItems={orderItems} orderTotal={orderTotal} showLogin={showLogin} signUp={signUp} setShowSignUp={setShowSignUp} changeShowLogin={changeShowLogin} user={user} loggedIn={loggedIn}/>
         )
       case "address":
         return (
