@@ -36,3 +36,16 @@
     display: flex;
     flex-direction: column;
 }
+
+.cart-sidebar > button{
+    width: 15vw;
+}
+
+.tandCs{
+    color:gray;
+    margin: 1rem;
+}
+
+.payment-icon{
+    margin-right: 0.5rem;
+}

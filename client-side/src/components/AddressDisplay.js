@@ -1,6 +1,10 @@
 import React from 'react'
+import {useState} from "react";
 
 function AddressDisplay({addressOptions, autoCompleteAddress, findAddresses, progressThroughCheckout}) {
+
+    const [shippingSameAsBilling, setShippingSameAsBilling] = useState(true);
+
   return (
     <div className="cart">
             <h1>Please enter delivery details</h1>
@@ -39,9 +43,12 @@ function AddressDisplay({addressOptions, autoCompleteAddress, findAddresses, pro
               <label>County: </label>
               <input type="text" id="county-address" required/><br></br>
               <label>Postcode: </label>
-              <input type="text" id="postcode-address" required/>
+              <input type="text" id="postcode-address" required/><br></br>
+              <label>Billing address the same as delivery address </label>
+              <input type="checkbox" id="billing-delivery-address-checkbox" checked={shippingSameAsBilling}></input>
+
             </form>
-            <button onClick={progressThroughCheckout}><h2>Proceed to checkout</h2></button>
+            <button onClick={progressThroughCheckout}><h2>Proceed to payment</h2></button>
           </div>
           
   )
