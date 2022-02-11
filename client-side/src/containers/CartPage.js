@@ -4,6 +4,9 @@ import "../styles/cartPage.css";
 import CartDisplay from '../components/CartDisplay';
 import AddressDisplay from '../components/AddressDisplay';
 import PaymentDisplay from '../components/PaymentDisplay';
+import axios from 'axios';
+import {changeAddress} from '../redux-elements/deliveryAddress'
+
 
 
 function CartPage() {
@@ -17,6 +20,7 @@ function CartPage() {
 
   const[showLogin, setShowLogin] = useState(false);
   const [signUp, setShowSignUp] = useState(false)
+  const  deliveryAddress = useSelector((state) => state.address.address)
   
 
   const user = useSelector((state) => state.user.user)
@@ -73,6 +77,16 @@ function CartPage() {
     document.getElementById('postcode-address').value = selectedValue.getAttribute("postcode");
   }
 
+  function postOrder (orderItems, totalCost, deliveryAddress, userId) {
+    axios.post('/orders/add', {
+      "items" : orderItems,
+      "deliveryAddress" : deliveryAddress,
+      "totalCost" : totalCost,
+      "user" : userId
+    })
+    .then((result) => alert(result.data))
+}
+
   const renderSwitch = () => {
     switch(checkoutProgress){
       case "cart":
@@ -81,7 +95,8 @@ function CartPage() {
         )
       case "address":
         return (
-          <AddressDisplay addressOptions={addressOptions} autoCompleteAddress={autoCompleteAddress} findAddresses={findAddresses} progressThroughCheckout={progressThroughCheckout}/>
+          <AddressDisplay addressOptions={addressOptions} autoCompleteAddress={autoCompleteAddress} findAddresses={findAddresses} progressThroughCheckout={progressThroughCheckout}
+                          postOrder={postOrder}/>
         )
       case "payment":
         return <PaymentDisplay/>

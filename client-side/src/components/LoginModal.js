@@ -4,8 +4,10 @@ import '../styles/usermodal.css'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 import axios from "axios";
-import {changeName, changeEmail, changeOrders, changePassword, changeAddress} from '../redux-elements/user';
+import {changeName, changeEmail, changeOrders, changePassword, changeAddress, changeId} from '../redux-elements/user';
 import {logIn, logOut} from '../redux-elements/login'
+import {clearUser} from '../redux-elements/user';
+
 
 function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogin, user}) {
 
@@ -15,6 +17,7 @@ function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogi
 
     const logout = () => {
         dispatch(logOut())
+        dispatch(clearUser())
     }
 
      //Function which changes state of sign up form
@@ -40,12 +43,13 @@ function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogi
         }
       })
       .then((result) => {
-        // console.log(result.data.name);
+        console.log(result.data);
         dispatch(changeName(String(result.data.name)))
         dispatch(changeEmail(String(result.data.email)));
         dispatch(changeAddress(String(result.data.address)));
         dispatch(changePassword(String(result.data.password)));
         dispatch(changeOrders(Array(result.data.orders)));
+        dispatch(changeId(String(result.data._id)))
         dispatch(logIn());
         changeShowLogin()
       })

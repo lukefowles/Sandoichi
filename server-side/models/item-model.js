@@ -23,6 +23,20 @@ const itemSchema = new Schema({
         unique: false,
         trim: true,
         minlength: 1
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        unique: false,
+        trim: true,
+        minlength: 1
+    },
+    totalPrice: {
+        type: Number,
+        required: true,
+        unique: false,
+        trim: true,
+        minlength: 1
     }
 },
 {
