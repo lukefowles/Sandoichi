@@ -2,6 +2,7 @@ import {configureStore, getDefaultMiddleware, isAsyncThunkAction} from "@reduxjs
 import carouselReducer from "./carousel";
 import logInReducer from './login'
 import userReducer from "./user";
+import deliveryAddressReducer from "./deliveryAddress";
 import productsReducer from "./products"
 import orderReducer from "./orders"
 import thunkMiddleware from "redux-thunk";
@@ -16,6 +17,7 @@ import {
     PURGE,
     REGISTER
 } from 'redux-persist'
+import deliveryAddress from "./deliveryAddress";
 
 //Create store object to persist in storage
 //Key specifies the id of the object and the storage the type of storage used
@@ -26,7 +28,7 @@ const persistConfig = {
 
 //Combine the reduces
 const reducers = combineReducers({carousel: carouselReducer, user: userReducer,
-     products: productsReducer, orders: orderReducer, loggedIn: logInReducer})
+     products: productsReducer, orders: orderReducer, loggedIn: logInReducer, address: deliveryAddressReducer})
 
 //Create a persistent reducer
 const persistentReducer = persistReducer(persistConfig, reducers)
