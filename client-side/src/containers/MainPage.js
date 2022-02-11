@@ -10,20 +10,28 @@ import LoginModal from '../components/LoginModal'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {changeName, changeEmail, changeOrders, changePassword, changeAddress} from '../redux-elements/user';
-
+import {logIn, logOut} from '../redux-elements/login'
 
 function MainPage() {
 
   //State to monitor login modal
   const[showLogin, setShowLogin] = useState(false);
+  const [signUp, setShowSignUp] = useState(false)
 
   const user = useSelector((state) => state.user.user)
+  const loggedIn = useSelector((state) => state.loggedIn)
   const dispatch = useDispatch();
 
   //Function which changes the state of login modal
   function changeShowLogin() {
+    setShowSignUp(false)
     setShowLogin(!showLogin)
     console.log('works')
+  }
+
+  //Function which changes state of sign up form
+  function changeSignUp() {
+    setShowSignUp(!signUp)
   }
   
   //Function to handle login submit
@@ -50,15 +58,29 @@ function MainPage() {
         dispatch(changeAddress(String(result.data.address)));
         dispatch(changePassword(String(result.data.password)));
         dispatch(changeOrders(Array(result.data.orders)));
+        dispatch(logIn());
+        changeShowLogin()
       })
       .then(() => {console.log(user)})
     })
     .catch((err) => alert(err.response.data))
   }
+
+  function onSignUpSubmit(email, password, name, address) {
+    axios.post('/users/add', {
+      "email": email,
+      "name": name,
+      "password": password,
+      "address": address
+    })
+    .catch((err) => alert(err.response.data))
+    .then(() => onLoginSubmit(email,password))
+  }
   
   return <>
     <NavBar changeShowLogin={changeShowLogin}/>
-    <LoginModal onLoginSubmit={onLoginSubmit} showLogin={showLogin}/>
+    <LoginModal onLoginSubmit={onLoginSubmit} showLogin={showLogin} signUp={signUp}
+     changeSignUp={changeSignUp} onSignUpSubmit={onSignUpSubmit}/>
     <section className="landing-page" id="landing-page">
       <LandingPage/>
     </section>

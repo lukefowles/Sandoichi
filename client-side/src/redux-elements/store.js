@@ -1,5 +1,6 @@
 import {configureStore, getDefaultMiddleware, isAsyncThunkAction} from "@reduxjs/toolkit";
 import carouselReducer from "./carousel";
+import logInReducer from './login'
 import userReducer from "./user";
 import productsReducer from "./products"
 import orderReducer from "./orders"
@@ -25,7 +26,7 @@ const persistConfig = {
 
 //Combine the reduces
 const reducers = combineReducers({carousel: carouselReducer, user: userReducer,
-     products: productsReducer, orders: orderReducer})
+     products: productsReducer, orders: orderReducer, loggedIn: logInReducer})
 
 //Create a persistent reducer
 const persistentReducer = persistReducer(persistConfig, reducers)
