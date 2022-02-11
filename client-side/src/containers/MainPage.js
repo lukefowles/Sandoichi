@@ -10,7 +10,7 @@ import LoginModal from '../components/LoginModal'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {changeName, changeEmail, changeOrders, changePassword, changeAddress} from '../redux-elements/user';
-
+import {logIn, logOut} from '../redux-elements/login'
 
 function MainPage() {
 
@@ -19,6 +19,7 @@ function MainPage() {
   const [signUp, setShowSignUp] = useState(false)
 
   const user = useSelector((state) => state.user.user)
+  const loggedIn = useSelector((state) => state.loggedIn)
   const dispatch = useDispatch();
 
   //Function which changes the state of login modal
@@ -57,6 +58,7 @@ function MainPage() {
         dispatch(changeAddress(String(result.data.address)));
         dispatch(changePassword(String(result.data.password)));
         dispatch(changeOrders(Array(result.data.orders)));
+        dispatch(logIn());
         changeShowLogin()
       })
       .then(() => {console.log(user)})
