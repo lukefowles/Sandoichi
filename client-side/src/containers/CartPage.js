@@ -2,7 +2,7 @@ import { createDraftSafeSelector } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import "../styles/cartPage.css";
-import CartDispay from '../components/CartDispay';
+import CartDisplay from '../components/CartDisplay';
 import AddressDisplay from '../components/AddressDisplay';
 import PaymentDisplay from '../components/PaymentDisplay';
 
@@ -59,7 +59,7 @@ function CartPage() {
     switch(checkoutProgress){
       case "cart":
         return(
-          <CartDispay progressThroughCheckout={progressThroughCheckout} orderItems={orderItems}/>
+          <CartDisplay progressThroughCheckout={progressThroughCheckout} orderItems={orderItems} orderTotal={orderTotal}/>
         )
       case "address":
         return (
