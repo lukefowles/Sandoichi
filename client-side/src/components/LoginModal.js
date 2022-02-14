@@ -18,6 +18,9 @@ function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogi
     const logout = () => {
         dispatch(logOut())
         dispatch(clearUser())
+        axios.get('/users/logout', { withCredentials: "true" })
+        .then(() => alert('logout successful'))
+        .catch((err) => alert(err))
     }
 
      //Function which changes state of sign up form

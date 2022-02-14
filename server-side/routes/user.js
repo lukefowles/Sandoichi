@@ -154,4 +154,13 @@ userRouter.route('/delete/:email').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err)))
 });
 
+ //Route for logout
+ userRouter.get('/logout', (req, res) => {
+        
+    auth(res, req);
+    res.clearCookie('auth-token', {path: '/', domain: 'localhost', httpOnly: true}).end();
+    // res.cookie("auth-token", "", { expires: new Date() });
+
+})
+
 export default userRouter
