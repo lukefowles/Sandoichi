@@ -49,3 +49,12 @@
 .payment-icon{
     margin-right: 0.5rem;
 }
+
+#submit-order-button{
+    background-color: black;
+    color: white;
+    border: none;
+    width: 200px;
+    height: 75px;
+    margin: 3rem;
+}

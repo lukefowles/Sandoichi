@@ -5,12 +5,13 @@ import {changeAddress} from '../redux-elements/deliveryAddress'
 
 
 function AddressDisplay({addressOptions, autoCompleteAddress, findAddresses, progressThroughCheckout, postOrder}) {
-
-    const [shippingSameAsBilling, setShippingSameAsBilling] = useState(true);
+    const [checked, setChecked] = useState(false);
+    const [showForm, setShowForm] = useState(true);
     const deliveryAddress = useSelector((state) => state.address.address);
     const order = useSelector((state) => state.orders)
     const user = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
+    const defaultAddress = useSelector(state => state.user.user.address)
 
     function handleFormSubmission(event) {
       event.preventDefault();
@@ -21,10 +22,31 @@ function AddressDisplay({addressOptions, autoCompleteAddress, findAddresses, pro
       postOrder(order.items, order.totalCost, deliveryAddress, user.id);
     }
 
+    const handleCheckBox = () => {
+      console.log("called")
+      switch(checked){
+        case true:
+          console.log("unchecked")
+          setShowForm(true);
+          setChecked(false);
+        break;
+        case false:
+          console.log("checked")
+          setShowForm(false);
+          setChecked(true);
+          break;
+      }
+    
+    }
+
   return (
     <div className="cart">
             <h1>Please enter delivery details</h1>
             <form onSubmit={handleFormSubmission}>
+              <label>Use my default address </label>
+              <input type="checkbox" id="default-address-checkbox" onChange={handleCheckBox}></input><br></br>
+              {showForm ?
+              <>
               <label >Enter postcode: </label>
               <input name="postcode" type="text" id="postcode" onChange={(event) => findAddresses(event.target.value)}/><br></br>
               {addressOptions ?
@@ -60,9 +82,11 @@ function AddressDisplay({addressOptions, autoCompleteAddress, findAddresses, pro
               <input type="text" id="county-address" required/><br></br>
               <label>Postcode: </label>
               <input type="text" id="postcode-address" required/><br></br>
-              <label>Billing address the same as delivery address </label>
-              <input type="checkbox" id="billing-delivery-address-checkbox" checked={shippingSameAsBilling}></input>
-              <input type="submit" value="Submit" />
+              </>
+              :
+              <></>
+            }
+              <input type="submit" id="submit-order-button" value="Submit" onClick={progressThroughCheckout} />
             </form>
             {/* <button onClick={progressThroughCheckout}><h2>Proceed to payment</h2></button> */}
           </div>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import "../styles/cartPage.css";
 import CartDisplay from '../components/CartDisplay';
 import AddressDisplay from '../components/AddressDisplay';
-import PaymentDisplay from '../components/PaymentDisplay';
+import CompleteDisplay from '../components/CompleteDisplay';
 import axios from 'axios';
 import {changeAddress} from '../redux-elements/deliveryAddress'
 
@@ -45,10 +45,9 @@ function CartPage() {
         }
         break;
       case "address":
-        setCheckoutProgress("payment");
+        setCheckoutProgress("complete");
         break;
-      case "payment":
-        setCheckoutProgress("complete")
+      case "complete":
         break;
     }
   }
@@ -98,8 +97,8 @@ function CartPage() {
           <AddressDisplay addressOptions={addressOptions} autoCompleteAddress={autoCompleteAddress} findAddresses={findAddresses} progressThroughCheckout={progressThroughCheckout}
                           postOrder={postOrder}/>
         )
-      case "payment":
-        return <PaymentDisplay/>
+      case "complete":
+        return <CompleteDisplay/>
     }
 
   }
