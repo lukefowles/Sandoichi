@@ -58,3 +58,10 @@
     height: 75px;
     margin: 3rem;
 }
+
+.complete-display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
