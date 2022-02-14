@@ -76,7 +76,7 @@ function LoginModal({showLogin,  loggedIn, signUp, setShowSignUp, changeShowLogi
         if(loggedIn){
             console.log(loggedIn)
             return <div className={showLoginModal}>
-                <button onClick={logout}>Log out</button>
+                <button className="logout-button" onClick={logout}>Log out</button>
             </div>
             
         }

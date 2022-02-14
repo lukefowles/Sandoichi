@@ -3,7 +3,7 @@
     top: 30vh;
     left: 35vw;
     width: 30vw;
-    height: 40vh; 
+    height: 60vh; 
     background: rgba(238, 230, 230, 0.9);
     z-index: 2;
     border-radius: 10%;
@@ -71,4 +71,13 @@
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
 }
+
+.logout-button {
+  position: relative;
+  top: 45%;
+  left: 28%;
+  width: 8em;
+}
+
+
   
